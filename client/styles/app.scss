@@ -1,0 +1,189 @@
+//===============================================
+// Site Theme
+//===============================================
+
+$tan: #edd9c0;
+$green: #c9d8c5;
+$blue: #a8b6bf;
+$brown: #7d4627;
+$textColor: white;
+$linkColor: black;
+$linkHoverColor: dodgerblue;
+$iconSize: 2.5em;
+
+//===============================================
+// Global Styles
+//===============================================
+
+body {
+  background: white url("../assets/background.png") no-repeat fixed center;
+  // background-color: $brown;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+a {
+  text-decoration: none;
+  transition: 0.75s;
+  color: $linkColor;
+}
+
+a:active, a:focus, a:visited {
+  text-decoration: none;
+  color: $linkColor;
+}
+
+img {
+  width: 100px;
+  height: 100px;
+  padding: 30px 0px;
+}
+
+footer {
+  position: relative;
+  color: $textColor;
+  height: 15vh;
+
+  p {
+    @extend .center;
+  }
+}
+
+.icons:hover, .btn:hover  {
+
+  color: $linkHoverColor;
+}
+
+//===============================================
+// Landing View Styles
+//===============================================
+
+.video {
+  position: fixed;
+  top: 50%; left: 50%;
+  z-index: -100;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  transform: translate(-50%, -50%);
+}
+
+.landing {
+  position: relative;
+  color: $textColor;
+  min-height: 85vh;
+  font-size: 1.2em;
+}
+
+.landingTitle {
+  @extend .center;
+}
+
+.navbarLinks {
+  margin: 10px 0px;
+}
+
+.navLink {
+  padding: 0px 30px;
+}
+
+.navLink:hover {
+  text-decoration: none;
+  color: dodgerblue;
+}
+
+.iconbar {
+  padding: 20px 0px;
+}
+
+.icons {
+  @extend .navLink;
+  font-size: $iconSize;
+}
+
+//===============================================
+// Component Styles
+//===============================================
+
+.contact, .about {
+  padding: 33px;
+}
+
+.hidden {
+  display: none;
+}
+
+//===============================================
+// Project View Styles
+//===============================================
+
+
+.bg-0 {
+  background-color: $tan;
+  box-shadow: 0px 0px 10px #888888;
+  color: white;
+  padding-bottom: 20px;
+}
+
+.bg-1 {
+  background-color: $green;
+}
+
+.bg-2 {
+  background-color: $brown;
+}
+
+.bg-3 {
+  background-color: $blue;
+  box-shadow: 0px 0px 10px #888888;
+  color: #555555;
+}
+
+.frame {
+  // TODO: put this in when we get the height to 100% of the row
+  // background-color: white;
+}
+
+.title1 {
+  color: $brown;
+}
+
+.title2 {
+  color: $green;
+}
+
+.title3 {
+  color: $brown;
+}
+
+.description {
+  font-size: 2em;
+  padding: 0% 20%;
+}
+
+.demoImage {
+  width: 264px;
+  height: auto;
+}
+
+// .sliderImageLeft {
+//   opacity: 0;
+//   transform: translateX(-30%) scale(0.95);
+// }
+
+// .sliderImageRight {
+//   opacity: 0;
+//   transform: translateX(30%) scale(0.95);
+// }
+
+// .sliderImageLeft.active .sliderImageLeft.active {
+//   opacity: 1;
+//   transform: translateX(0%) scale(1);
+// }
+
