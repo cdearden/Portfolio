@@ -8,8 +8,8 @@
     "dev:start": "cd ./client && live-server --watch='./' --port=8090",
     "dev:sass": "sass --watch client/sass:assets/css",
     "dev:startServer": "nodemon server/server.js",
-    "prod:build": "webpack  --config webpack.config.prod.js --watch",
-    "prod:start": "forever start server/server.js"
+    "prod:build": "webpack  --config webpack.config.prod.js",
+    "start": "npm install && npm run prod:build && forever start server/server.js"
   },
   "repository": {
     "type": "git",
@@ -51,6 +51,7 @@
   },
   "dependencies": {
     "body-parser": "^1.16.1",
-    "extract-text-webpack-plugin": "^2.0.0"
+    "extract-text-webpack-plugin": "^2.0.0",
+    "forever": "^0.15.3"
   }
 }
