@@ -1,69 +1,118 @@
+const { resolve } = require('path');
+const { HotModuleReplacementPlugin, ProvidePlugin } = require('webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const path = require('path');
-const webpack = require('webpack');
+const resolvePath = relativePath => resolve(__dirname, relativePath);
 
-
+// env
+const paths = {
+  entry: resolvePath('src/index.jsx'),
+  output: resolvePath('build'),
+  htmlTemplate: resolvePath('public/template.html'),
+  public: '/',
+  contentBase: resolve('public'),
+};
 
 module.exports = {
-  entry: './client/index.js',
+  entry: paths.entry,
 
   output: {
-    path: __dirname + "/client/dist",
+    path: paths.output,
     filename: 'bundle.js',
-    publicPath: 'http://localhost:7700/dist',
+    publicPath: paths.public,
   },
 
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
   },
 
   module: {
-    loaders: [
+    rules: [
       {
-        test: /\.css$/,
-        loader: 'style-loader!css-loader',
-        options: {
-          url: false
-        }
+        enforce: 'pre',
+        test: /\.jsx?$/,
+        loader: 'eslint-loader',
+        exclude: /node_modules/,
+      },
+      {
+        exclude: [
+          /\.html$/,
+          /\.(js|jsx)(\?.*)?$/,
+          /\.css$/,
+          /\.scss$/,
+          /\.json$/,
+          /\.svg$/,
+        ],
+        loader: 'url-loader',
+        query: {
+          limit: 10000,
+          name: 'static/media/[name].[hash:8].[ext]',
+        },
       },
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: 'babel-loader',
-        query: {
-         presets: ['react', 'es2015', 'stage-0'],
-        }
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['es2015', 'react', 'stage-0'],
+          },
+        },
       },
       {
-        test: /\.scss$/,
-        loaders: ['style-loader', 'css-loader', 'sass-loader'],
-        options: {
-          url: false
-        }
+        test: /\.s?css$/,
+        use: [
+          'style-loader',
+          {
+            loader: 'css-loader',
+            options: {
+              url: false,
+            },
+          },
+          'resolve-url-loader',
+          'sass-loader?sourceMap',
+          'postcss-loader'],
+      },
+      {
+        test: /\.svg$/,
+        loader: 'file-loader',
+        query: {
+          name: 'static/media/[name].[hash:8].[ext]',
+        },
       },
     ],
   },
 
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.ProvidePlugin({
-        jQuery: 'jquery',
-        $: 'jquery',
-        jquery: 'jquery'
+    new HotModuleReplacementPlugin(),
+    new ProvidePlugin({
+      jQuery: 'jquery',
+      $: 'jquery',
+      jquery: 'jquery',
+    }),
+    new HtmlWebpackPlugin({
+      title: 'Portfolio',
+      template: paths.htmlTemplate,
     }),
   ],
 
-  devtool: 'source-map',
+  devtool: 'eval-source-map',
+
   devServer: {
     hot: true,
     inline: true,
     port: 7700,
     historyApiFallback: true,
-    contentBase: '/'
+    contentBase: paths.contentBase,
+  },
+
+  stats: {
+    colors: true,
+    reasons: true,
   },
 
   externals: {
-    'cheerio': 'window',
+    cheerio: 'window',
     'react/lib/ExecutionEnvironment': true,
     'react/lib/ReactContext': true,
   },

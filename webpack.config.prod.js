@@ -1,79 +1,118 @@
+const { resolve } = require('path');
+const { ProvidePlugin, DefinePlugin, optimize } = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const path = require('path');
-const webpack = require('webpack');
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
-
+const resolvePath = relativePath => resolve(__dirname, relativePath);
 
 // env
-const buildDirectory = './client/';
+const paths = {
+  entry: resolvePath('src/index.jsx'),
+  output: resolvePath('build'),
+  htmlTemplate: resolvePath('public/template.html'),
+  public: '',
+};
 
 module.exports = {
-  entry: "./client/index.js",
+  entry: paths.entry,
 
   output: {
-    path: __dirname + "/client/dist",
-    filename: "bundle.js",
-    publicPath: './dist/'
+    path: paths.output,
+    filename: 'bundle.js',
+    publicPath: paths.public,
   },
 
   resolve: {
-    extensions: ['.js', '.jsx']
+    extensions: ['.js', '.jsx'],
   },
 
   module: {
     rules: [
       {
+        enforce: 'pre',
         test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
+        loader: 'eslint-loader',
+        exclude: '/node_modules/',
+      },
+      {
+        exclude: [
+          /\.html$/,
+          /\.(js|jsx)(\?.*)?$/,
+          /\.css$/,
+          /\.scss$/,
+          /\.json$/,
+          /\.svg$/,
+        ],
+        loader: 'url-loader',
         query: {
-         presets: ['es2015', 'stage-0'],
+          limit: 10000,
+          name: 'static/media/[name].[hash:8].[ext]',
         },
       },
-      // {
-      //   test: /\.css$/,
-      //   loader: 'style-loader!css-loader!resolve-url-loader',
-      //   // options: { url: false },
-      // },
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['es2015', 'react', 'stage-0'],
+          },
+        },
+      },
       {
         test: /\.s?css$/,
         use: ExtractTextPlugin.extract({
           // use style-loader in development
-          fallback: "style-loader",
+          fallback: 'style-loader',
           use: [{
-            loader: "css-loader",
+            loader: 'css-loader',
+            options: {
+              url: false,
+            },
           }, {
-            loader: "resolve-url-loader"
+            loader: 'resolve-url-loader',
           }, {
-            loader: "sass-loader?sourceMap"
+            loader: 'sass-loader?sourceMap',
+          }, {
+            loader: 'postcss-loader',
           }],
           publicPath: './',
-        })
+        }),
       },
       {
-        test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&mimetype=application/font-woff" },
-      {
-        test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" },
-      {
-        test: /\.png$/,
-          loader: 'file-loader',
-          query: {
-            name: './[name].[ext]',
-            publicPath: './'
-          },
-      }
+        test: /\.svg$/,
+        loader: 'file-loader',
+        query: {
+          name: 'static/media/[name].[hash:8].[ext]',
+        },
+      },
     ],
   },
+
   plugins: [
-    new webpack.ProvidePlugin({
+    new ProvidePlugin({
       jQuery: 'jquery',
       $: 'jquery',
-      jquery: 'jquery'
+      jquery: 'jquery',
     }),
-    new webpack.optimize.UglifyJsPlugin(),
+    new DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production'),
+      },
+    }),
+    new optimize.UglifyJsPlugin({
+      compress: {
+        warnings: true,
+      },
+    }),
     new ExtractTextPlugin({
-      filename: "custom.styles.css",
-      disable: process.env.NODE_ENV === "development"
-    })
-  ]
+      filename: 'custom.styles.css',
+      disable: process.env.NODE_ENV === 'development',
+    }),
+    new HtmlWebpackPlugin({
+      title: 'Portfolio',
+      template: paths.htmlTemplate,
+    }),
+  ],
 };
+

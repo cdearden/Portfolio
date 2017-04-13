@@ -1,0 +1,12 @@
+$textColor: white;
+
+.landing {
+  position: relative;
+  color: $textColor;
+  min-height: 100vh;
+  font-size: 1.2em;
+  font-family: Cormorant, Helvetica,Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  font-weight: normal
+}
+
