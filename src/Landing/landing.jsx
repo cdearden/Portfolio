@@ -6,7 +6,7 @@ import MyButton from '../MyButton/myButton';
 import './landing.scss';
 
 const Landing = () => (
-  <section className="layout-content landing" >
+  <section className="landing" >
     <BackgroundVideo />
     <div className="landing-content text-center text-clr-primary font-cormorant" >
       <Title />

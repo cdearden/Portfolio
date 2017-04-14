@@ -3,8 +3,8 @@ import './title.scss';
 
 const Title = () => (
   <section className="landingTitle" >
-    <h1>Craig Dearden</h1>
-    <h3>Full Stack Developer</h3>
+    <p className="title" >Craig Dearden</p>
+    <p className="subTitle" >Full Stack Developer</p>
   </section>
 );
 
