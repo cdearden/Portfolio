@@ -1,11 +1,24 @@
 
+.project {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 5%;
+}
+
+.project-description {
+  padding: 10% 15%;
+}
+
+.project-image {
+
+}
 
 .description {
-  font-size: 2em;
   padding: 0% 20%;
 }
 
 .demoImage {
-  width: 264px;
+  max-width: 264px;
+  width: 95vw;
   height: auto;
 }

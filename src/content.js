@@ -1,5 +1,4 @@
 
-
 export const landingTitle = 'Craig Dearden ';
 export const landingSudTitle = 'Full Stack Engineer';
 

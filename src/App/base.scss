@@ -1,0 +1,30 @@
+*,
+body {
+  box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
+}
+
+a,
+a:focus,
+a:visited,
+a:active,
+a:hover {
+  text-decoration: none;
+}
+
+.sr-only {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

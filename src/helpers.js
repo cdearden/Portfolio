@@ -6,7 +6,7 @@ $(document).ready(() => {
       event.preventDefault();
       const hash = '#apps';
       $('html, body').animate({
-        scrollTop: $(hash).offset().top,
+        scrollTop: $(hash).offset().top - $('.mainNavbar').offsetHeight(),
       }, 800, () => {
         window.location.hash = hash;
       });
@@ -18,7 +18,7 @@ $(document).ready(() => {
       event.preventDefault();
       const hash = '#apps';
       $('html, body').animate({
-        scrollTop: $(hash).offset().top,
+        scrollTop: $(hash).offset().top - $('.mainNavbar').offsetHeight(),
       }, 800, () => {
         window.location.hash = hash;
       });

@@ -4,7 +4,6 @@ import { createBrowserHistory } from 'history';
 import App from '../App/app';
 import About from '../About/about';
 
-
 const history = createBrowserHistory();
 
 const Root = () => (

@@ -1,0 +1,46 @@
+
+$linkColor: black;
+$linkHoverColor: dodgerblue;
+
+@font-face {
+  font-family: Cormorant;
+  src: url(fonts/cormorant/cormorant/Cormorant-Regular.ttf);
+}
+
+@font-face {
+  font-family: Lato;
+  src: url(fonts/lato/Lato-Medium.ttf);
+}
+
+body {
+  background: white url("photos/background.png");
+}
+
+.theme-link { color: $linkColor; }
+.theme-link:hover { color: $linkHoverColor; }
+.theme-transition { transition: 0.75s; }
+.theme-border {
+  border: 0px;
+  border-radius: 5px;
+}
+.theme-box-shadow { box-shadow: 0px 0px 10px #888888; }
+.theme-background { background-color: white; }
+
+.icon-size-lg { font-size: 250%; }
+.icon-size-l { font-size: 150%; }
+.icon-size { font-size: 100%; }
+.icon-size-s { font-size: 50%; }
+
+.text-clr-primary { color: white; }
+.text-clr-secondary { color: black; }
+
+.text-xl { font-size: 140%; }
+.text-l { font-size: 120%; }
+.text {}
+.text-s { font-size: 90%; }
+.text-xs { font-size: 80%; }
+
+.text-center { text-align: center; }
+
+.font-cormorant { font-family: Cormorant, Helvetica, Arial, sans-serif; }
+.font-lato { font-family: Lato, Helvetica, Arial, sans-serif; }

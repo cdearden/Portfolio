@@ -1,25 +1,15 @@
 
-$linkColor: black;
-$linkHoverColor: dodgerblue;
-
 .mainNavbar {
   background-color: #414141;
-  color: white;
   position: fixed;
   top: 0px;
   right: 0px;
   z-index: 1;
   width: 100vw;
+  height: 30px;
+  padding: 5px;
 }
 
-.navLink, .navLink:focus, .navLink:visited {
-  text-decoration: none;
-  transition: 0.75s;
+.navLink, {
   padding: 0px 30px;
-  color: $linkColor;
-}
-
-.navLink:hover, .navLink:active {
-  text-decoration: none;
-  color: $linkHoverColor;
 }

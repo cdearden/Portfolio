@@ -1,26 +1,8 @@
-$linkColor: black;
-$linkHoverColor: dodgerblue;
-$iconSize: 2.5em;
 
 .iconbar {
   padding: 20px 0px;
 }
 
-.icons {
-  text-decoration: none;
-  transition: 0.75s;
+.icon-spacing  {
   padding: 0px 30px;
-  font-size: $iconSize;
-}
-
-.navLink, .navLink:focus, .navLink:visited {
-  text-decoration: none;
-  transition: 0.75s;
-  padding: 0px 30px;
-  color: $linkColor;
-}
-
-.navLink:hover, .navLink:active {
-  text-decoration: none;
-  color: $linkHoverColor;
 }
